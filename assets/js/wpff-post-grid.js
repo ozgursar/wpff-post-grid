@@ -5,17 +5,17 @@
 	'use strict';
 
 	/**
-	 * Attach filter behaviour to a single .wpff-isn-block element.
+	 * Attach filter behaviour to a single .wpff-pg-block element.
 	 */
 	function initGrid( block ) {
-		const filterBtns = block.querySelectorAll( '.wpff-isn-filter-btn' );
-		const items      = block.querySelectorAll( '.wpff-isn-item' );
+		const filterBtns = block.querySelectorAll( '.wpff-pg-filter-btn' );
+		const items      = block.querySelectorAll( '.wpff-pg-item' );
 
 		if ( ! filterBtns.length ) return;
 
 		// Give each card a unique view-transition-name so cards animate independently
 		items.forEach( function ( item, i ) {
-			item.style.viewTransitionName = 'wpff-isn-item-' + i;
+			item.style.viewTransitionName = 'wpff-pg-item-' + i;
 		} );
 
 		filterBtns.forEach( function ( btn ) {
@@ -57,7 +57,7 @@
 	}
 
 	function initAll() {
-		document.querySelectorAll( '.wpff-isn-block' ).forEach( initGrid );
+		document.querySelectorAll( '.wpff-pg-block' ).forEach( initGrid );
 	}
 
 	document.addEventListener( 'DOMContentLoaded', initAll );
@@ -67,10 +67,10 @@
 		mutations.forEach( function ( m ) {
 			m.addedNodes.forEach( function ( node ) {
 				if ( node.nodeType !== 1 ) return;
-				if ( node.classList && node.classList.contains( 'wpff-isn-block' ) ) {
+				if ( node.classList && node.classList.contains( 'wpff-pg-block' ) ) {
 					initGrid( node );
 				} else if ( node.querySelectorAll ) {
-					node.querySelectorAll( '.wpff-isn-block' ).forEach( initGrid );
+					node.querySelectorAll( '.wpff-pg-block' ).forEach( initGrid );
 				}
 			} );
 		} );

@@ -1,6 +1,6 @@
 <?php
 /**
- * Filterable post-grid block (wpff-isn/post-grid).
+ * Filterable post-grid block (wpff-post-grid/post-grid).
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -60,7 +60,7 @@ class WPFF_Post_Grid {
 		);
 
 		register_block_type(
-			'wpff-isn/post-grid',
+			'wpff-post-grid/post-grid',
 			array(
 				'render_callback' => array( $this, 'render_block' ),
 				'editor_script'   => 'wpff-post-grid-editor',
@@ -297,7 +297,7 @@ class WPFF_Post_Grid {
 			$pt_obj        = get_post_type_object( $post_type );
 			$pt_label      = $pt_obj ? strtolower( $pt_obj->labels->name ) : 'posts';
 			$empty_message = sprintf( /* translators: %s: post type plural name */ __( 'No %s found.', 'wpff-post-grid' ), $pt_label );
-			return '<div class="wpff-isn-empty">' . esc_html( $empty_message ) . '</div>';
+			return '<div class="wpff-pg-empty">' . esc_html( $empty_message ) . '</div>';
 		}
 
 		$terms = array();
@@ -315,7 +315,7 @@ class WPFF_Post_Grid {
 		}
 
 		$style = sprintf(
-			'--wpff-isn-cols:%d;--wpff-isn-cols-mobile:%d;--wpff-isn-gap:%s;--wpff-isn-ratio:%s;',
+			'--wpff-pg-cols:%d;--wpff-pg-cols-mobile:%d;--wpff-pg-gap:%s;--wpff-pg-ratio:%s;',
 			$columns,
 			$cols_mobile,
 			esc_attr( $gap ),
@@ -323,39 +323,39 @@ class WPFF_Post_Grid {
 		);
 
 		$card_style = sprintf(
-			'--wpff-isn-bg:%s;--wpff-isn-radius:%s;--wpff-isn-card-padding:%s;--wpff-isn-item-padding:%s;%s%s%s%s',
+			'--wpff-pg-bg:%s;--wpff-pg-radius:%s;--wpff-pg-card-padding:%s;--wpff-pg-item-padding:%s;%s%s%s%s',
 			$bg_color ? esc_attr( $bg_color ) : 'transparent',
 			esc_attr( $border_radius ),
 			esc_attr( $card_padding ),
 			esc_attr( $item_padding ),
 			( $border_color && '0' !== $border_width ) ? 'border:' . esc_attr( $border_width ) . ' solid ' . esc_attr( $border_color ) . ';' : '',
-			$title_font_size ? '--wpff-isn-title-fs:' . esc_attr( $title_font_size ) . ';' : '',
-			$excerpt_font_size ? '--wpff-isn-excerpt-fs:' . esc_attr( $excerpt_font_size ) . ';' : '',
-			$category_font_size ? '--wpff-isn-category-fs:' . esc_attr( $category_font_size ) . ';' : ''
+			$title_font_size ? '--wpff-pg-title-fs:' . esc_attr( $title_font_size ) . ';' : '',
+			$excerpt_font_size ? '--wpff-pg-excerpt-fs:' . esc_attr( $excerpt_font_size ) . ';' : '',
+			$category_font_size ? '--wpff-pg-category-fs:' . esc_attr( $category_font_size ) . ';' : ''
 		);
 
 		ob_start();
 		?>
-		<div class="wpff-isn-block" style="<?php echo esc_attr( $style ); ?>">
+		<div class="wpff-pg-block" style="<?php echo esc_attr( $style ); ?>">
 
 			<?php if ( ! empty( $terms ) ) : ?>
-			<div class="wpff-isn-filters wpff-isn-filters--<?php echo esc_attr( $filter_align ); ?>"
+			<div class="wpff-pg-filters wpff-pg-filters--<?php echo esc_attr( $filter_align ); ?>"
 				role="group"
 				aria-label="<?php esc_attr_e( 'Filter posts', 'wpff-post-grid' ); ?>"
 				<?php
 				if ( $btn_color ) :
 					?>
-					style="--wpff-isn-btn-color:<?php echo esc_attr( $btn_color ); ?>;"<?php endif; ?>>
+					style="--wpff-pg-btn-color:<?php echo esc_attr( $btn_color ); ?>;"<?php endif; ?>>
 
 				<?php if ( $show_all ) : ?>
-				<button class="wpff-isn-filter-btn wpff-isn-filter-btn--<?php echo esc_attr( $btn_style ); ?> is-active"
+				<button class="wpff-pg-filter-btn wpff-pg-filter-btn--<?php echo esc_attr( $btn_style ); ?> is-active"
 						data-term="all" aria-pressed="true">
 					<?php echo esc_html( $all_text ); ?>
 				</button>
 				<?php endif; ?>
 
 				<?php foreach ( $terms as $term ) : ?>
-				<button class="wpff-isn-filter-btn wpff-isn-filter-btn--<?php echo esc_attr( $btn_style ); ?>"
+				<button class="wpff-pg-filter-btn wpff-pg-filter-btn--<?php echo esc_attr( $btn_style ); ?>"
 						data-term="<?php echo esc_attr( $term->slug ); ?>" aria-pressed="false">
 					<?php echo esc_html( $term->name ); ?>
 				</button>
@@ -364,7 +364,7 @@ class WPFF_Post_Grid {
 			</div>
 			<?php endif; ?>
 
-			<div class="wpff-isn-grid">
+			<div class="wpff-pg-grid">
 				<?php
 				$item_index = 0;
 				while ( $query->have_posts() ) :
@@ -388,23 +388,23 @@ class WPFF_Post_Grid {
 						$item_url = esc_url( get_permalink() );
 					}
 					?>
-				<article class="wpff-isn-item" data-terms="<?php echo esc_attr( $term_slugs ); ?>" style="<?php echo esc_attr( $card_style ); ?>">
+				<article class="wpff-pg-item" data-terms="<?php echo esc_attr( $term_slugs ); ?>" style="<?php echo esc_attr( $card_style ); ?>">
 
 					<?php if ( $show_image && has_post_thumbnail() ) : ?>
-					<a class="wpff-isn-item__image-wrap" href="<?php echo $item_url; ?>"<?php echo $link_tab_attrs; ?> tabindex="-1" aria-hidden="true">
+					<a class="wpff-pg-item__image-wrap" href="<?php echo $item_url; ?>"<?php echo $link_tab_attrs; ?> tabindex="-1" aria-hidden="true">
 						<?php
 						echo get_the_post_thumbnail(
 							$post_id,
 							$image_size,
 							0 === $item_index
 								? array(
-									'class'         => 'wpff-isn-item__image',
+									'class'         => 'wpff-pg-item__image',
 									'loading'       => 'eager',
 									'fetchpriority' => 'high',
 									'alt'           => the_title_attribute( array( 'echo' => false ) ),
 								)
 								: array(
-									'class'   => 'wpff-isn-item__image',
+									'class'   => 'wpff-pg-item__image',
 									'loading' => 'lazy',
 									'alt'     => the_title_attribute( array( 'echo' => false ) ),
 								)
@@ -414,30 +414,30 @@ class WPFF_Post_Grid {
 					<?php endif; ?>
 
 					<?php if ( $show_title || $show_excerpt || $show_date || $show_read_more ) : ?>
-					<div class="wpff-isn-item__body">
+					<div class="wpff-pg-item__body">
 
 						<?php if ( $show_date ) : ?>
-						<time class="wpff-isn-item__date" datetime="<?php echo esc_attr( get_the_date( 'c' ) ); ?>">
+						<time class="wpff-pg-item__date" datetime="<?php echo esc_attr( get_the_date( 'c' ) ); ?>">
 							<?php echo esc_html( get_the_date() ); ?>
 						</time>
 						<?php endif; ?>
 
 						<?php if ( $show_category && $first_term_name ) : ?>
-						<span class="wpff-isn-item__category"><?php echo esc_html( $first_term_name ); ?></span>
+						<span class="wpff-pg-item__category"><?php echo esc_html( $first_term_name ); ?></span>
 						<?php endif; ?>
 
 						<?php if ( $show_title ) : ?>
-						<h3 class="wpff-isn-item__title">
+						<h3 class="wpff-pg-item__title">
 							<a href="<?php echo $item_url; ?>"<?php echo $link_tab_attrs; ?>><?php the_title(); ?></a>
 						</h3>
 						<?php endif; ?>
 
 						<?php if ( $show_excerpt ) : ?>
-						<p class="wpff-isn-item__excerpt"><?php echo esc_html( wp_trim_words( get_the_excerpt(), $excerpt_length, '…' ) ); ?></p>
+						<p class="wpff-pg-item__excerpt"><?php echo esc_html( wp_trim_words( get_the_excerpt(), $excerpt_length, '…' ) ); ?></p>
 						<?php endif; ?>
 
 						<?php if ( $show_read_more ) : ?>
-						<a class="wpff-isn-item__readmore" href="<?php echo $item_url; ?>"<?php echo $read_more_attrs; ?>>
+						<a class="wpff-pg-item__readmore" href="<?php echo $item_url; ?>"<?php echo $read_more_attrs; ?>>
 							<?php echo esc_html( $read_more_text ); ?>
 						</a>
 						<?php endif; ?>

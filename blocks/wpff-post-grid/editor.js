@@ -55,7 +55,7 @@
   // Block definition
   // -------------------------------------------------------------------------
 
-  registerBlockType('wpff-isn/post-grid', {
+  registerBlockType('wpff-post-grid/post-grid', {
     title: __('Post Grid', 'wpff-post-grid'),
     description: __('Filterable post grid with taxonomy filter buttons.', 'wpff-post-grid'),
     category: 'widgets',
@@ -183,7 +183,7 @@
         [attrs.postType]
       )
 
-      const blockProps = useBlockProps({ className: 'wpff-isn-editor-wrap' })
+      const blockProps = useBlockProps({ className: 'wpff-pg-editor-wrap' })
 
       return el(
         'div',
@@ -653,10 +653,10 @@
         // -----------------------------------------------------------
         attrs.postType
           ? el(ServerSideRender, {
-              block: 'wpff-isn/post-grid',
+              block: 'wpff-post-grid/post-grid',
               attributes: attrs,
               LoadingResponsePlaceholder: function () {
-                return el('div', { className: 'wpff-isn-editor-loading' }, __('Loading preview…', 'wpff-post-grid'))
+                return el('div', { className: 'wpff-pg-editor-loading' }, __('Loading preview…', 'wpff-post-grid'))
               }
             })
           : el(Placeholder, {

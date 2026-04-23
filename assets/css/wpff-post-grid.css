@@ -1,0 +1,271 @@
+/* =============================================================================
+   WPFF Post Grid – Frontend Styles
+   ============================================================================= */
+
+/* --- CSS variable defaults (overridden by inline style on .wpff-isn-block) --- */
+
+.wpff-isn-block {
+  --wpff-isn-cols: 3;
+  --wpff-isn-cols-mobile: 1;
+  --wpff-isn-gap: 1.5rem;
+  --wpff-isn-ratio: 4 / 3;
+}
+
+/* =============================================================================
+   Filter bar
+   ============================================================================= */
+
+.wpff-isn-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.wpff-isn-filters--left {
+  justify-content: flex-start;
+}
+.wpff-isn-filters--center {
+  justify-content: center;
+}
+.wpff-isn-filters--right {
+  justify-content: flex-end;
+}
+
+/* Base button */
+.wpff-isn-filter-btn {
+  cursor: pointer;
+  display: inline-block;
+  padding: 0.45em 1.1em;
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.4;
+  border: 2px solid var(--wpff-isn-btn-color, #333);
+  background: transparent;
+  color: var(--wpff-isn-btn-color, #333);
+  text-decoration: none;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.wpff-isn-filter-btn:hover,
+.wpff-isn-filter-btn.is-active {
+  background: var(--wpff-isn-btn-color, #111);
+  border-color: var(--wpff-isn-btn-color, #111);
+  color: #fff;
+}
+
+/* Focus ring */
+.wpff-isn-filter-btn:focus-visible {
+  outline: 3px solid #005fcc;
+  outline-offset: 2px;
+}
+
+/* Pill */
+.wpff-isn-filter-btn--pill {
+  border-radius: 999px;
+}
+
+/* Square */
+.wpff-isn-filter-btn--square {
+  border-radius: 0;
+}
+
+/* Outline – active state keeps transparent bg, emphasises with bold border */
+.wpff-isn-filter-btn--outline {
+  border-radius: 4px;
+  background: transparent;
+}
+
+.wpff-isn-filter-btn--outline.is-active,
+.wpff-isn-filter-btn--outline:hover {
+  background: transparent;
+  border-color: var(--wpff-isn-btn-color, #111);
+  color: var(--wpff-isn-btn-color, #111);
+  font-weight: 700;
+}
+
+/* =============================================================================
+   Grid
+   ============================================================================= */
+
+.wpff-isn-grid {
+  display: grid;
+  grid-template-columns: repeat(var(--wpff-isn-cols), 1fr);
+  gap: var(--wpff-isn-gap);
+}
+
+/* =============================================================================
+   Item / card
+   ============================================================================= */
+
+.wpff-isn-item {
+  --wpff-isn-bg: transparent;
+  --wpff-isn-radius: 0px;
+  --wpff-isn-card-padding: 1rem;
+  --wpff-isn-item-padding: 0;
+
+  background-color: var(--wpff-isn-bg);
+  border-radius: var(--wpff-isn-radius);
+  overflow: hidden;
+  padding: var(--wpff-isn-item-padding);
+  transition: opacity 0.25s ease;
+}
+
+.wpff-isn-item.is-hidden {
+  display: none;
+}
+
+/* Image wrapper – enforces aspect ratio */
+.wpff-isn-item__image-wrap {
+  display: block;
+  overflow: hidden;
+  aspect-ratio: var(--wpff-isn-ratio);
+}
+
+.wpff-isn-item__image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.wpff-isn-item__image-wrap:hover .wpff-isn-item__image {
+  transform: scale(1.04);
+}
+
+/* Card body */
+.wpff-isn-item__body {
+  padding: var(--wpff-isn-card-padding);
+}
+
+.wpff-isn-item__date {
+  display: block;
+  font-size: 0.75rem;
+  color: #888;
+  margin-bottom: 0.2rem;
+}
+
+.wpff-isn-item__category {
+  display: block;
+  font-size: var(--wpff-isn-category-fs, 0.7rem);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: #9ca3af;
+  margin-bottom: 0.3rem;
+}
+
+.wpff-isn-item__title {
+  margin: 0 0 0.4rem;
+  font-size: var(--wpff-isn-title-fs, 1rem);
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.wpff-isn-item__title a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.wpff-isn-item__title a:hover {
+  text-decoration: underline;
+}
+
+.wpff-isn-item__excerpt {
+  margin: 0 0 0.5rem;
+  font-size: var(--wpff-isn-excerpt-fs, 0.875rem);
+  line-height: 1.5;
+  color: #555;
+}
+
+.wpff-isn-item__readmore {
+  display: inline-block;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #111;
+  text-decoration: underline;
+}
+
+.wpff-isn-item__readmore:hover {
+  text-decoration: none;
+}
+
+/* =============================================================================
+   View Transitions (filter animation)
+   ============================================================================= */
+
+/* Fade each card individually when the filter changes */
+::view-transition-old(wpff-isn-item-*),
+::view-transition-new(wpff-isn-item-*) {
+  animation-duration: 0.25s;
+  animation-timing-function: ease;
+}
+
+/* Items that stay visible: gentle cross-fade */
+::view-transition-old(wpff-isn-item-*) {
+  animation-name: wpff-isn-fade-out;
+}
+::view-transition-new(wpff-isn-item-*) {
+  animation-name: wpff-isn-fade-in;
+}
+
+@keyframes wpff-isn-fade-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes wpff-isn-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* =============================================================================
+   Empty state
+   ============================================================================= */
+
+.wpff-isn-empty {
+  padding: 2rem;
+  text-align: center;
+  color: #888;
+  font-style: italic;
+}
+
+/* =============================================================================
+   Responsive
+   ============================================================================= */
+
+@media (max-width: 768px) {
+  .wpff-isn-grid {
+    grid-template-columns: repeat(var(--wpff-isn-cols-mobile), 1fr);
+  }
+}
+
+/* =============================================================================
+   Reduced motion
+   ============================================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .wpff-isn-item,
+  .wpff-isn-item__image {
+    transition: none;
+  }
+
+  ::view-transition-old(wpff-isn-item-*),
+  ::view-transition-new(wpff-isn-item-*) {
+    animation: none;
+  }
+}
+
+.wp-block-term-description { display: flex; flex-direction: column; gap: 1em; }

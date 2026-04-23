@@ -1,0 +1,16 @@
+/* =============================================================================
+   WPFF Post Grid – Editor Styles
+   ============================================================================= */
+
+.wpff-isn-editor-wrap {
+	min-height: 80px;
+}
+
+.wpff-isn-editor-loading {
+	padding:       2rem;
+	text-align:    center;
+	color:         #888;
+	font-style:    italic;
+	border:        1px dashed #ccc;
+	border-radius: 4px;
+}

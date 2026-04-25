@@ -102,15 +102,11 @@
    ============================================================================= */
 
 .wpff-pg-item {
-  --wpff-pg-bg: transparent;
-  --wpff-pg-radius: 0px;
-  --wpff-pg-card-padding: 1rem;
-  --wpff-pg-item-padding: 0;
-  background-color: var(--wpff-pg-bg);
+  background-color: var(--wpff-pg-bg, transparent);
   border: var(--wpff-pg-border, none);
-  border-radius: var(--wpff-pg-radius);
+  border-radius: var(--wpff-pg-radius, 0px);
   overflow: hidden;
-  padding: var(--wpff-pg-item-padding);
+  padding: var(--wpff-pg-item-padding, 0);
   transition: opacity 0.25s ease;
 }
 
@@ -139,7 +135,7 @@
 
 /* Card body */
 .wpff-pg-item__body {
-  padding: var(--wpff-pg-card-padding);
+  padding: var(--wpff-pg-card-padding, 1rem);
 }
 
 .wpff-pg-item__date {

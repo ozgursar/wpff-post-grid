@@ -224,7 +224,7 @@
               label: __('Posts Per Page', 'wpff-post-grid'),
               value: attrs.postsPerPage,
               min: 1,
-              max: 100,
+              max: 999,
               onChange: function (v) {
                 setAttr({ postsPerPage: v })
               }

@@ -315,20 +315,16 @@ class WPFF_Post_Grid {
 		}
 
 		$style = sprintf(
-			'--wpff-pg-cols:%d;--wpff-pg-cols-mobile:%d;--wpff-pg-gap:%s;--wpff-pg-ratio:%s;',
+			'--wpff-pg-cols:%d;--wpff-pg-cols-mobile:%d;--wpff-pg-gap:%s;--wpff-pg-ratio:%s;--wpff-pg-bg:%s;--wpff-pg-radius:%s;--wpff-pg-card-padding:%s;--wpff-pg-item-padding:%s;%s%s%s%s',
 			$columns,
 			$cols_mobile,
 			esc_attr( $gap ),
-			esc_attr( $image_ratio )
-		);
-
-		$card_style = sprintf(
-			'--wpff-pg-bg:%s;--wpff-pg-radius:%s;--wpff-pg-card-padding:%s;--wpff-pg-item-padding:%s;%s%s%s%s',
+			esc_attr( $image_ratio ),
 			$bg_color ? esc_attr( $bg_color ) : 'transparent',
 			esc_attr( $border_radius ),
 			esc_attr( $card_padding ),
 			esc_attr( $item_padding ),
-			( $border_color && '0' !== $border_width ) ? 'border:' . esc_attr( $border_width ) . ' solid ' . esc_attr( $border_color ) . ';' : '',
+			( $border_color && '0' !== $border_width ) ? '--wpff-pg-border:' . esc_attr( $border_width ) . ' solid ' . esc_attr( $border_color ) . ';' : '',
 			$title_font_size ? '--wpff-pg-title-fs:' . esc_attr( $title_font_size ) . ';' : '',
 			$excerpt_font_size ? '--wpff-pg-excerpt-fs:' . esc_attr( $excerpt_font_size ) . ';' : '',
 			$category_font_size ? '--wpff-pg-category-fs:' . esc_attr( $category_font_size ) . ';' : ''
@@ -388,7 +384,7 @@ class WPFF_Post_Grid {
 						$item_url = esc_url( get_permalink() );
 					}
 					?>
-				<article class="wpff-pg-item" data-terms="<?php echo esc_attr( $term_slugs ); ?>" style="<?php echo esc_attr( $card_style ); ?>">
+				<article class="wpff-pg-item" data-terms="<?php echo esc_attr( $term_slugs ); ?>">
 
 					<?php if ( $show_image && has_post_thumbnail() ) : ?>
 					<a class="wpff-pg-item__image-wrap" href="<?php echo $item_url; ?>"<?php echo $link_tab_attrs; ?> tabindex="-1" aria-hidden="true">

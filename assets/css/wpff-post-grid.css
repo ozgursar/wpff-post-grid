@@ -106,8 +106,10 @@
   --wpff-pg-radius: 0px;
   --wpff-pg-card-padding: 1rem;
   --wpff-pg-item-padding: 0;
+  --wpff-pg-border: none;
 
   background-color: var(--wpff-pg-bg);
+  border: var(--wpff-pg-border);
   border-radius: var(--wpff-pg-radius);
   overflow: hidden;
   padding: var(--wpff-pg-item-padding);
@@ -249,6 +251,7 @@
 @media (max-width: 768px) {
   .wpff-pg-grid {
     grid-template-columns: repeat(var(--wpff-pg-cols-mobile), 1fr);
+    gap: 1em;
   }
 }
 

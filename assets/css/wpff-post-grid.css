@@ -106,10 +106,8 @@
   --wpff-pg-radius: 0px;
   --wpff-pg-card-padding: 1rem;
   --wpff-pg-item-padding: 0;
-  --wpff-pg-border: none;
-
   background-color: var(--wpff-pg-bg);
-  border: var(--wpff-pg-border);
+  border: var(--wpff-pg-border, none);
   border-radius: var(--wpff-pg-radius);
   overflow: hidden;
   padding: var(--wpff-pg-item-padding);

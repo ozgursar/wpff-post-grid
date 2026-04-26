@@ -99,7 +99,8 @@
       buttonStyle: { type: 'string', default: 'pill' },
       showAllButton: { type: 'boolean', default: true },
       allButtonText: { type: 'string', default: 'All' },
-      filterButtonColor: { type: 'string', default: '' }
+      filterButtonColor: { type: 'string', default: '' },
+      showNoPostsMessage: { type: 'boolean', default: true }
     },
 
     // -----------------------------------------------------------------------
@@ -255,6 +256,14 @@
               ],
               onChange: function (v) {
                 setAttr({ order: v })
+              }
+            }),
+
+            el(ToggleControl, {
+              label: __('Show "No Posts Found" Message', 'wpff-post-grid'),
+              checked: attrs.showNoPostsMessage,
+              onChange: function (v) {
+                setAttr({ showNoPostsMessage: v })
               }
             })
           ),

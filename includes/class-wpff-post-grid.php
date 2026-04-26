@@ -216,6 +216,10 @@ class WPFF_Post_Grid {
 						'type'    => 'string',
 						'default' => '',
 					),
+					'showNoPostsMessage' => array(
+						'type'    => 'boolean',
+						'default' => true,
+					),
 				),
 			)
 		);
@@ -270,7 +274,8 @@ class WPFF_Post_Grid {
 							? $attrs['buttonStyle'] : 'pill';
 		$show_all           = (bool) ( $attrs['showAllButton'] ?? true );
 		$all_text           = sanitize_text_field( $attrs['allButtonText'] ?? 'All' );
-		$btn_color          = sanitize_text_field( $attrs['filterButtonColor'] ?? '' );
+		$btn_color             = sanitize_text_field( $attrs['filterButtonColor'] ?? '' );
+		$show_no_posts_message = (bool) ( $attrs['showNoPostsMessage'] ?? true );
 
 		if ( ! post_type_exists( $post_type ) ) {
 			$post_type = 'post';
@@ -299,6 +304,9 @@ class WPFF_Post_Grid {
 		$query = new WP_Query( $query_args );
 
 		if ( ! $query->have_posts() ) {
+			if ( ! $show_no_posts_message ) {
+				return '';
+			}
 			$pt_obj        = get_post_type_object( $post_type );
 			$pt_label      = $pt_obj ? strtolower( $pt_obj->labels->name ) : 'posts';
 			$empty_message = sprintf( /* translators: %s: post type plural name */ __( 'No %s found.', 'wpff-post-grid' ), $pt_label );

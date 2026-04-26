@@ -119,6 +119,7 @@
   display: block;
   overflow: hidden;
   aspect-ratio: var(--wpff-pg-ratio);
+  margin: 0;
 }
 
 .wpff-pg-item__image {

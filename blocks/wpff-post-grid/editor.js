@@ -74,6 +74,7 @@
       showImage: { type: 'boolean', default: true },
       imageSize: { type: 'string', default: 'medium' },
       imageRatio: { type: 'string', default: '4/3' },
+      showPlaceholder: { type: 'boolean', default: false },
       showTitle: { type: 'boolean', default: true },
       showExcerpt: { type: 'boolean', default: false },
       excerptLength: { type: 'integer', default: 30 },
@@ -337,6 +338,15 @@
                 ],
                 onChange: function (v) {
                   setAttr({ imageRatio: v })
+                }
+              }),
+
+            attrs.showImage &&
+              el(ToggleControl, {
+                label: __('Use Placeholder for Missing Images', 'wpff-post-grid'),
+                checked: attrs.showPlaceholder,
+                onChange: function (v) {
+                  setAttr({ showPlaceholder: v })
                 }
               }),
 

@@ -112,6 +112,10 @@ class WPFF_Post_Grid {
 						'type'    => 'string',
 						'default' => '4/3',
 					),
+					'showPlaceholder'   => array(
+						'type'    => 'boolean',
+						'default' => false,
+					),
 					'showTitle'         => array(
 						'type'    => 'boolean',
 						'default' => true,
@@ -235,6 +239,7 @@ class WPFF_Post_Grid {
 		$show_image         = (bool) ( $attrs['showImage'] ?? true );
 		$image_size         = sanitize_key( $attrs['imageSize'] ?? 'medium' );
 		$image_ratio        = $this->sanitize_ratio( $attrs['imageRatio'] ?? '4/3' );
+		$show_placeholder   = (bool) ( $attrs['showPlaceholder'] ?? false );
 		$show_title         = (bool) ( $attrs['showTitle'] ?? true );
 		$show_excerpt       = (bool) ( $attrs['showExcerpt'] ?? false );
 		$excerpt_length     = min( max( absint( $attrs['excerptLength'] ?? 30 ), 5 ), 100 );
@@ -407,6 +412,17 @@ class WPFF_Post_Grid {
 						);
 						?>
 					</a>
+					<?php elseif ( $show_image && ! has_post_thumbnail() && $show_placeholder ) : ?>
+					<a class="wpff-pg-item__image-wrap" href="<?php echo $item_url; ?>"<?php echo $link_tab_attrs; ?> tabindex="-1" aria-hidden="true">
+						<img
+							class="wpff-pg-item__image"
+							src="<?php echo esc_url( WPFF_PG_URL . 'assets/images/placeholder.webp' ); ?>"
+							alt="Placeholder"
+							<?php echo 0 === $item_index ? 'loading="eager" fetchpriority="high"' : 'loading="lazy"'; ?>
+						/>
+					</a>
+					<?php elseif ( $show_image && ! has_post_thumbnail() ) : ?>
+					<figure class="wpff-pg-item__image-wrap" aria-hidden="true"></figure>
 					<?php endif; ?>
 
 					<?php if ( $show_title || $show_excerpt || $show_date || $show_read_more ) : ?>

@@ -2,7 +2,7 @@
 /**
  * Plugin Name: WP Fix Fast Post Grid
  * Description: Filterable post grid Gutenberg block with taxonomy filter buttons.
- * Version:     1.0.7
+ * Version:     1.0.8
  * Author:      Ozgur Sar
  * Author URI:  https://wpfixfast.com/
  * Plugin URI:  https://wpfixfast.com/

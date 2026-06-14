@@ -51,6 +51,13 @@
     { value: 'em', label: 'em', default: 1.5 }
   ]
 
+  const GAP_UNITS = [
+    { value: 'px', label: 'px', default: 0, step: 1 },
+    { value: 'rem', label: 'rem', default: 0, step: 0.1 },
+    { value: 'em', label: 'em', default: 0, step: 0.1 },
+    { value: '%', label: '%', default: 0, step: 1 }
+  ]
+
   // -------------------------------------------------------------------------
   // Block definition
   // -------------------------------------------------------------------------
@@ -365,7 +372,7 @@
               label: __('Content Gap', 'wpff-post-grid'),
               help: __('Space between the image and each element of the card content.', 'wpff-post-grid'),
               value: attrs.contentGap,
-              units: PADDING_UNITS,
+              units: GAP_UNITS,
               min: 0,
               onChange: function (v) {
                 setAttr({ contentGap: v || '0' })

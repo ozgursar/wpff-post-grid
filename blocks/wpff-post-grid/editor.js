@@ -89,6 +89,7 @@
       excerptFontSize: { type: 'string', default: '' },
       categoryFontSize: { type: 'string', default: '' },
       showDate: { type: 'boolean', default: false },
+      dateBelowExcerpt: { type: 'boolean', default: false },
       showReadMore: { type: 'boolean', default: false },
       readMoreText: { type: 'string', default: 'Read More' },
       linkTarget: { type: 'string', default: 'permalink' },
@@ -405,6 +406,15 @@
                 setAttr({ showDate: v })
               }
             }),
+
+            attrs.showDate &&
+              el(ToggleControl, {
+                label: __('Show Date Below Excerpt', 'wpff-post-grid'),
+                checked: attrs.dateBelowExcerpt,
+                onChange: function (v) {
+                  setAttr({ dateBelowExcerpt: v })
+                }
+              }),
 
             el(ToggleControl, {
               label: __('Show Read More Button', 'wpff-post-grid'),

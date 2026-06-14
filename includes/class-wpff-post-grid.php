@@ -172,6 +172,10 @@ class WPFF_Post_Grid {
 						'type'    => 'boolean',
 						'default' => false,
 					),
+					'dateBelowExcerpt'   => array(
+						'type'    => 'boolean',
+						'default' => false,
+					),
 					'showReadMore'       => array(
 						'type'    => 'boolean',
 						'default' => false,
@@ -259,6 +263,7 @@ class WPFF_Post_Grid {
 		$excerpt_font_size     = $this->sanitize_font_size( $attrs['excerptFontSize'] ?? '' );
 		$category_font_size    = $this->sanitize_font_size( $attrs['categoryFontSize'] ?? '' );
 		$show_date             = (bool) ( $attrs['showDate'] ?? false );
+		$date_below_excerpt    = (bool) ( $attrs['dateBelowExcerpt'] ?? false );
 		$show_read_more        = (bool) ( $attrs['showReadMore'] ?? false );
 		$read_more_text        = sanitize_text_field( $attrs['readMoreText'] ?? 'Read More' );
 		$link_target           = in_array( $attrs['linkTarget'] ?? 'permalink', array( 'permalink', 'meta_field' ), true )
@@ -434,13 +439,22 @@ class WPFF_Post_Grid {
 					<figure class="wpff-pg-item__image-wrap" aria-hidden="true"></figure>
 					<?php endif; ?>
 
+					<?php
+					$date_html = '';
+					if ( $show_date ) {
+						$date_html = sprintf(
+							'<time class="wpff-pg-item__date" datetime="%s">%s</time>',
+							esc_attr( get_the_date( 'c' ) ),
+							esc_html( get_the_date() )
+						);
+					}
+					?>
+
 					<?php if ( $show_title || $show_excerpt || $show_date || $show_read_more ) : ?>
 					<div class="wpff-pg-item__body">
 
-						<?php if ( $show_date ) : ?>
-						<time class="wpff-pg-item__date" datetime="<?php echo esc_attr( get_the_date( 'c' ) ); ?>">
-							<?php echo esc_html( get_the_date() ); ?>
-						</time>
+						<?php if ( $show_date && ! $date_below_excerpt ) : ?>
+							<?php echo $date_html; ?>
 						<?php endif; ?>
 
 						<?php if ( $show_category && $first_term_name ) : ?>
@@ -455,6 +469,10 @@ class WPFF_Post_Grid {
 
 						<?php if ( $show_excerpt ) : ?>
 						<p class="wpff-pg-item__excerpt"><?php echo esc_html( wp_trim_words( get_the_excerpt(), $excerpt_length, '…' ) ); ?></p>
+						<?php endif; ?>
+
+						<?php if ( $show_date && $date_below_excerpt ) : ?>
+							<?php echo $date_html; ?>
 						<?php endif; ?>
 
 						<?php if ( $show_read_more ) : ?>

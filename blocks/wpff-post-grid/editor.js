@@ -85,6 +85,7 @@
       borderRadius: { type: 'string', default: '0px' },
       cardPadding: { type: 'string', default: '1rem' },
       itemPadding: { type: 'string', default: '0' },
+      contentGap: { type: 'string', default: '0.4rem' },
       titleFontSize: { type: 'string', default: '' },
       excerptFontSize: { type: 'string', default: '' },
       categoryFontSize: { type: 'string', default: '' },
@@ -359,6 +360,17 @@
                   setAttr({ showPlaceholder: v })
                 }
               }),
+
+            el(UnitControl, {
+              label: __('Content Gap', 'wpff-post-grid'),
+              help: __('Space between the image and each element of the card content.', 'wpff-post-grid'),
+              value: attrs.contentGap,
+              units: PADDING_UNITS,
+              min: 0,
+              onChange: function (v) {
+                setAttr({ contentGap: v || '0' })
+              }
+            }),
 
             el(ToggleControl, {
               label: __('Show Title', 'wpff-post-grid'),

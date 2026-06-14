@@ -152,6 +152,10 @@ class WPFF_Post_Grid {
 						'type'    => 'string',
 						'default' => '1rem',
 					),
+					'contentGap'         => array(
+						'type'    => 'string',
+						'default' => '0.4rem',
+					),
 					'itemPadding'        => array(
 						'type'    => 'string',
 						'default' => '0',
@@ -258,6 +262,7 @@ class WPFF_Post_Grid {
 		$raw_radius            = $attrs['borderRadius'] ?? '0px';
 		$border_radius         = $this->sanitize_css_length( is_numeric( $raw_radius ) ? absint( $raw_radius ) . 'px' : $raw_radius, '0px' );
 		$card_padding          = $this->sanitize_css_padding( $attrs['cardPadding'] ?? '1rem' );
+		$content_gap           = $this->sanitize_css_length( $attrs['contentGap'] ?? '0.4rem', '0.4rem' );
 		$item_padding          = $this->sanitize_css_padding( $attrs['itemPadding'] ?? '0' );
 		$title_font_size       = $this->sanitize_font_size( $attrs['titleFontSize'] ?? '' );
 		$excerpt_font_size     = $this->sanitize_font_size( $attrs['excerptFontSize'] ?? '' );
@@ -334,7 +339,7 @@ class WPFF_Post_Grid {
 		}
 
 		$style = sprintf(
-			'--wpff-pg-cols:%d;--wpff-pg-cols-mobile:%d;--wpff-pg-gap:%s;--wpff-pg-ratio:%s;--wpff-pg-bg:%s;--wpff-pg-radius:%s;--wpff-pg-card-padding:%s;--wpff-pg-item-padding:%s;%s%s%s%s',
+			'--wpff-pg-cols:%d;--wpff-pg-cols-mobile:%d;--wpff-pg-gap:%s;--wpff-pg-ratio:%s;--wpff-pg-bg:%s;--wpff-pg-radius:%s;--wpff-pg-card-padding:%s;--wpff-pg-item-padding:%s;--wpff-pg-content-gap:%s;%s%s%s%s',
 			$columns,
 			$cols_mobile,
 			esc_attr( $gap ),
@@ -343,6 +348,7 @@ class WPFF_Post_Grid {
 			esc_attr( $border_radius ),
 			esc_attr( $card_padding ),
 			esc_attr( $item_padding ),
+			esc_attr( $content_gap ),
 			( $border_color && '0' !== $border_width ) ? '--wpff-pg-border:' . esc_attr( $border_width ) . ' solid ' . esc_attr( $border_color ) . ';' : '',
 			$title_font_size ? '--wpff-pg-title-fs:' . esc_attr( $title_font_size ) . ';' : '',
 			$excerpt_font_size ? '--wpff-pg-excerpt-fs:' . esc_attr( $excerpt_font_size ) . ';' : '',

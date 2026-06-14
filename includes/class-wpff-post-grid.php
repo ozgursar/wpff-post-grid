@@ -68,151 +68,151 @@ class WPFF_Post_Grid {
 				'style'           => 'wpff-post-grid',
 				'script'          => 'wpff-post-grid',
 				'attributes'      => array(
-					'postType'          => array(
+					'postType'           => array(
 						'type'    => 'string',
 						'default' => 'post',
 					),
-					'taxonomy'          => array(
+					'taxonomy'           => array(
 						'type'    => 'string',
 						'default' => '',
 					),
-					'postsPerPage'      => array(
+					'postsPerPage'       => array(
 						'type'    => 'integer',
 						'default' => 12,
 					),
-					'orderBy'           => array(
+					'orderBy'            => array(
 						'type'    => 'string',
 						'default' => 'date',
 					),
-					'order'             => array(
+					'order'              => array(
 						'type'    => 'string',
 						'default' => 'DESC',
 					),
-					'columns'           => array(
+					'columns'            => array(
 						'type'    => 'integer',
 						'default' => 3,
 					),
-					'columnsMobile'     => array(
+					'columnsMobile'      => array(
 						'type'    => 'integer',
 						'default' => 1,
 					),
-					'gap'               => array(
+					'gap'                => array(
 						'type'    => 'string',
 						'default' => '1.5rem',
 					),
-					'showImage'         => array(
+					'showImage'          => array(
 						'type'    => 'boolean',
 						'default' => true,
 					),
-					'imageSize'         => array(
+					'imageSize'          => array(
 						'type'    => 'string',
 						'default' => 'medium',
 					),
-					'imageRatio'        => array(
+					'imageRatio'         => array(
 						'type'    => 'string',
 						'default' => '4/3',
 					),
-					'showPlaceholder'   => array(
+					'showPlaceholder'    => array(
 						'type'    => 'boolean',
 						'default' => false,
 					),
-					'showTitle'         => array(
+					'showTitle'          => array(
 						'type'    => 'boolean',
 						'default' => true,
 					),
-					'showExcerpt'       => array(
+					'showExcerpt'        => array(
 						'type'    => 'boolean',
 						'default' => false,
 					),
-					'excerptLength'     => array(
+					'excerptLength'      => array(
 						'type'    => 'integer',
 						'default' => 30,
 					),
-					'showCategory'      => array(
+					'showCategory'       => array(
 						'type'    => 'boolean',
 						'default' => false,
 					),
-					'backgroundColor'   => array(
+					'backgroundColor'    => array(
 						'type'    => 'string',
 						'default' => '',
 					),
-					'borderColor'       => array(
+					'borderColor'        => array(
 						'type'    => 'string',
 						'default' => '',
 					),
-					'borderWidth'       => array(
+					'borderWidth'        => array(
 						'type'    => 'string',
 						'default' => '0',
 					),
-					'borderRadius'      => array(
+					'borderRadius'       => array(
 						'type'    => 'string',
 						'default' => '0px',
 					),
-					'cardPadding'       => array(
+					'cardPadding'        => array(
 						'type'    => 'string',
 						'default' => '1rem',
 					),
-					'itemPadding'       => array(
+					'itemPadding'        => array(
 						'type'    => 'string',
 						'default' => '0',
 					),
-					'titleFontSize'     => array(
+					'titleFontSize'      => array(
 						'type'    => 'string',
 						'default' => '',
 					),
-					'excerptFontSize'   => array(
+					'excerptFontSize'    => array(
 						'type'    => 'string',
 						'default' => '',
 					),
-					'categoryFontSize'  => array(
+					'categoryFontSize'   => array(
 						'type'    => 'string',
 						'default' => '',
 					),
-					'showDate'          => array(
+					'showDate'           => array(
 						'type'    => 'boolean',
 						'default' => false,
 					),
-					'showReadMore'      => array(
+					'showReadMore'       => array(
 						'type'    => 'boolean',
 						'default' => false,
 					),
-					'readMoreText'      => array(
+					'readMoreText'       => array(
 						'type'    => 'string',
 						'default' => 'Read More',
 					),
-					'linkTarget'        => array(
+					'linkTarget'         => array(
 						'type'    => 'string',
 						'default' => 'permalink',
 					),
-					'linkMetaField'     => array(
+					'linkMetaField'      => array(
 						'type'    => 'string',
 						'default' => '',
 					),
-					'linkNewTab'        => array(
+					'linkNewTab'         => array(
 						'type'    => 'boolean',
 						'default' => false,
 					),
-					'downloadLink'      => array(
+					'downloadLink'       => array(
 						'type'    => 'boolean',
 						'default' => false,
 					),
-					'filterAlign'       => array(
+					'filterAlign'        => array(
 						'type'    => 'string',
 						'default' => 'center',
 					),
-					'buttonStyle'       => array(
+					'buttonStyle'        => array(
 						'type'    => 'string',
 						'default' => 'pill',
 					),
-					'showAllButton'     => array(
+					'showAllButton'      => array(
 						'type'    => 'boolean',
 						'default' => true,
 					),
-					'allButtonText'     => array(
+					'allButtonText'      => array(
 						'type'    => 'string',
 						'default' => 'All',
 					),
-					'filterButtonColor' => array(
+					'filterButtonColor'  => array(
 						'type'    => 'string',
 						'default' => '',
 					),
@@ -231,49 +231,49 @@ class WPFF_Post_Grid {
 
 	public function render_block( $attrs ) {
 
-		$post_type          = sanitize_key( $attrs['postType'] ?? 'post' );
-		$taxonomy           = sanitize_key( $attrs['taxonomy'] ?? '' );
-		$posts_per_page     = absint( $attrs['postsPerPage'] ?? 12 );
-		$order_by           = sanitize_key( $attrs['orderBy'] ?? 'date' );
-		$order              = in_array( strtoupper( $attrs['order'] ?? 'DESC' ), array( 'ASC', 'DESC' ), true )
+		$post_type             = sanitize_key( $attrs['postType'] ?? 'post' );
+		$taxonomy              = sanitize_key( $attrs['taxonomy'] ?? '' );
+		$posts_per_page        = absint( $attrs['postsPerPage'] ?? 12 );
+		$order_by              = sanitize_key( $attrs['orderBy'] ?? 'date' );
+		$order                 = in_array( strtoupper( $attrs['order'] ?? 'DESC' ), array( 'ASC', 'DESC' ), true )
 							? strtoupper( $attrs['order'] ) : 'DESC';
-		$columns            = min( max( absint( $attrs['columns'] ?? 3 ), 1 ), 6 );
-		$cols_mobile        = min( max( absint( $attrs['columnsMobile'] ?? 1 ), 1 ), 6 );
-		$gap                = $this->sanitize_css_length( $attrs['gap'] ?? '1.5rem' );
-		$show_image         = (bool) ( $attrs['showImage'] ?? true );
-		$image_size         = sanitize_key( $attrs['imageSize'] ?? 'medium' );
-		$image_ratio        = $this->sanitize_ratio( $attrs['imageRatio'] ?? '4/3' );
-		$show_placeholder   = (bool) ( $attrs['showPlaceholder'] ?? false );
-		$show_title         = (bool) ( $attrs['showTitle'] ?? true );
-		$show_excerpt       = (bool) ( $attrs['showExcerpt'] ?? false );
-		$excerpt_length     = min( max( absint( $attrs['excerptLength'] ?? 30 ), 5 ), 100 );
-		$show_category      = (bool) ( $attrs['showCategory'] ?? false );
-		$bg_color           = sanitize_text_field( $attrs['backgroundColor'] ?? '' );
-		$border_color       = sanitize_text_field( $attrs['borderColor'] ?? '' );
-		$border_width       = $this->sanitize_css_length( $attrs['borderWidth'] ?? '0', '0' );
-		$raw_radius         = $attrs['borderRadius'] ?? '0px';
-		$border_radius      = $this->sanitize_css_length( is_numeric( $raw_radius ) ? absint( $raw_radius ) . 'px' : $raw_radius, '0px' );
-		$card_padding       = $this->sanitize_css_padding( $attrs['cardPadding'] ?? '1rem' );
-		$item_padding       = $this->sanitize_css_padding( $attrs['itemPadding'] ?? '0' );
-		$title_font_size    = $this->sanitize_font_size( $attrs['titleFontSize'] ?? '' );
-		$excerpt_font_size  = $this->sanitize_font_size( $attrs['excerptFontSize'] ?? '' );
-		$category_font_size = $this->sanitize_font_size( $attrs['categoryFontSize'] ?? '' );
-		$show_date          = (bool) ( $attrs['showDate'] ?? false );
-		$show_read_more     = (bool) ( $attrs['showReadMore'] ?? false );
-		$read_more_text     = sanitize_text_field( $attrs['readMoreText'] ?? 'Read More' );
-		$link_target        = in_array( $attrs['linkTarget'] ?? 'permalink', array( 'permalink', 'meta_field' ), true )
+		$columns               = min( max( absint( $attrs['columns'] ?? 3 ), 1 ), 6 );
+		$cols_mobile           = min( max( absint( $attrs['columnsMobile'] ?? 1 ), 1 ), 6 );
+		$gap                   = $this->sanitize_css_length( $attrs['gap'] ?? '1.5rem' );
+		$show_image            = (bool) ( $attrs['showImage'] ?? true );
+		$image_size            = sanitize_key( $attrs['imageSize'] ?? 'medium' );
+		$image_ratio           = $this->sanitize_ratio( $attrs['imageRatio'] ?? '4/3' );
+		$show_placeholder      = (bool) ( $attrs['showPlaceholder'] ?? false );
+		$show_title            = (bool) ( $attrs['showTitle'] ?? true );
+		$show_excerpt          = (bool) ( $attrs['showExcerpt'] ?? false );
+		$excerpt_length        = min( max( absint( $attrs['excerptLength'] ?? 30 ), 5 ), 100 );
+		$show_category         = (bool) ( $attrs['showCategory'] ?? false );
+		$bg_color              = sanitize_text_field( $attrs['backgroundColor'] ?? '' );
+		$border_color          = sanitize_text_field( $attrs['borderColor'] ?? '' );
+		$border_width          = $this->sanitize_css_length( $attrs['borderWidth'] ?? '0', '0' );
+		$raw_radius            = $attrs['borderRadius'] ?? '0px';
+		$border_radius         = $this->sanitize_css_length( is_numeric( $raw_radius ) ? absint( $raw_radius ) . 'px' : $raw_radius, '0px' );
+		$card_padding          = $this->sanitize_css_padding( $attrs['cardPadding'] ?? '1rem' );
+		$item_padding          = $this->sanitize_css_padding( $attrs['itemPadding'] ?? '0' );
+		$title_font_size       = $this->sanitize_font_size( $attrs['titleFontSize'] ?? '' );
+		$excerpt_font_size     = $this->sanitize_font_size( $attrs['excerptFontSize'] ?? '' );
+		$category_font_size    = $this->sanitize_font_size( $attrs['categoryFontSize'] ?? '' );
+		$show_date             = (bool) ( $attrs['showDate'] ?? false );
+		$show_read_more        = (bool) ( $attrs['showReadMore'] ?? false );
+		$read_more_text        = sanitize_text_field( $attrs['readMoreText'] ?? 'Read More' );
+		$link_target           = in_array( $attrs['linkTarget'] ?? 'permalink', array( 'permalink', 'meta_field' ), true )
 							? $attrs['linkTarget'] : 'permalink';
-		$link_meta_field    = sanitize_key( $attrs['linkMetaField'] ?? '' );
-		$link_new_tab       = (bool) ( $attrs['linkNewTab'] ?? false );
-		$link_tab_attrs     = $link_new_tab ? ' target="_blank" rel="noopener noreferrer"' : '';
-		$download_link      = (bool) ( $attrs['downloadLink'] ?? false );
-		$read_more_attrs    = $download_link ? ' download' : $link_tab_attrs;
-		$filter_align       = in_array( $attrs['filterAlign'] ?? 'center', array( 'left', 'center', 'right' ), true )
+		$link_meta_field       = sanitize_key( $attrs['linkMetaField'] ?? '' );
+		$link_new_tab          = (bool) ( $attrs['linkNewTab'] ?? false );
+		$link_tab_attrs        = $link_new_tab ? ' target="_blank" rel="noopener noreferrer"' : '';
+		$download_link         = (bool) ( $attrs['downloadLink'] ?? false );
+		$read_more_attrs       = $download_link ? ' download' : $link_tab_attrs;
+		$filter_align          = in_array( $attrs['filterAlign'] ?? 'center', array( 'left', 'center', 'right' ), true )
 							? $attrs['filterAlign'] : 'center';
-		$btn_style          = in_array( $attrs['buttonStyle'] ?? 'pill', array( 'pill', 'square', 'outline' ), true )
+		$btn_style             = in_array( $attrs['buttonStyle'] ?? 'pill', array( 'pill', 'square', 'outline' ), true )
 							? $attrs['buttonStyle'] : 'pill';
-		$show_all           = (bool) ( $attrs['showAllButton'] ?? true );
-		$all_text           = sanitize_text_field( $attrs['allButtonText'] ?? 'All' );
+		$show_all              = (bool) ( $attrs['showAllButton'] ?? true );
+		$all_text              = sanitize_text_field( $attrs['allButtonText'] ?? 'All' );
 		$btn_color             = sanitize_text_field( $attrs['filterButtonColor'] ?? '' );
 		$show_no_posts_message = (bool) ( $attrs['showNoPostsMessage'] ?? true );
 
@@ -282,12 +282,13 @@ class WPFF_Post_Grid {
 		}
 
 		$query_args = array(
-			'post_type'      => $post_type,
-			'posts_per_page' => $posts_per_page ? $posts_per_page : -1,
-			'post_status'    => 'publish',
-			'orderby'        => $order_by,
-			'order'          => $order,
-			'no_found_rows'  => true,
+			'post_type'           => $post_type,
+			'posts_per_page'      => $posts_per_page ? $posts_per_page : -1,
+			'post_status'         => 'publish',
+			'orderby'             => $order_by,
+			'order'               => $order,
+			'no_found_rows'       => true,
+			'ignore_sticky_posts' => true,
 		);
 
 		$queried = get_queried_object();
